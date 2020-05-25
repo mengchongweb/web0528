@@ -173,9 +173,11 @@
             (data) => {data.sort((r1,r2) => r1.id-r2.id)},   //通过id从小到大排序
         ]
 
-        let genderFilter = []
+        let genderFilter = [
 
-        ageEles.forEach((item, key) => {
+        ]
+
+        ageEles.forEach((item, key) => {	
             item.onclick = function(){
                 argSort[key](data);
                 console.log(data);
