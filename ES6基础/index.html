@@ -86,7 +86,7 @@
   <body>
     <div class="wrap">
       <div class="ctrl">
-        <div class="age_sort nu">
+        <div class="age_sort">
           <a href="javascript:;">年龄从小到大</a>
           <a href="javascript:;">年龄从大到小</a>
           <a href="javascript:;" class="active">默认排序</a>
@@ -153,6 +153,8 @@
       {
         let ageEles = document.querySelectorAll(".age_sort a");
         let genderEles = document.querySelectorAll('.gender_show a');
+        let ageIndex = 2;
+        let genderIndex = 2;
         // 渲染数据
         function render(data) {
           var str = "";
@@ -174,20 +176,33 @@
         ]
 
         let genderFilter = [
-
+          // 筛选男
+          () => data.filter(v => v.gender === '男'),
+          //筛选女
+          () => data.filter(v => v.gender === '女'),
+          () => [...data]
         ]
-
+        //年龄排序
         ageEles.forEach((item, key) => {	
             item.onclick = function(){
-                argSort[key](data);
-                console.log(data);
-                render(data);
+                // 点击去掉所有高亮，
+                ageEles.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                ageIndex = key;
+                let newData = genderFilter[genderIndex]();
+                argSort[key](newData);
+                render(newData);
             }
         });
-
+        //性别筛选
         genderEles.forEach(function(item,key){
           item.onclick = function(){
-
+            genderEles.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+            let newData = genderFilter[key]();
+            genderIndex = key;
+            argSort[ageIndex](newData);
+            render(newData);
           }
         })
 
