@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="tab1">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+    </div>
+    <div class="tab2">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+    </div>
+
+    <button class="nextPre">点击我下一页</button>
+    <button class="autoPlay">点击我第二个选项卡自动轮播</button>
+</body>
+<script>
+    // 一个选项卡  --》按照需求一步步走
+    // 多个选项卡； ---> 把共同逻辑提取；
+    // 第一个选项卡 有 下一页功能； （某一个的功能）  
+    // 第二个选项卡  有轮播功能；
+    
+    // 独特功能； 部分选项卡需要的功能 ？ 传配置参数； 一个选项卡独有功能 返还对象；
+    function Tab(btns, ps, isNextPre = false,isAutoPlay=false) {
+        // 所有选项卡 共有的功能；
+        btns.forEach((value, key) => {
+            value.onclick = function () {
+                psFor(key);
+            }
+        })
+        // 下一页
+        if (isNextPre) {
+            // 第一个选项卡
+            let num = 0;
+            document.querySelector(".nextPre").onclick = function () {
+                num++;
+                num = num > 2 ? 0 : num;
+                psFor(num);
+            }
+        }
+
+        // 控制自动轮播
+        if(isAutoPlay){
+            // 第二个选项卡的
+            document.querySelector(".autoPlay").onclick = function(){
+                let num = 0;
+                setInterval(() => {
+                     num++;
+                     num = num > 2 ? 0 : num;
+                     psFor(num);
+                }, 1000);
+            }
+        }
+        function psFor(key) {
+            ps.forEach((v, k) => {
+                if (key == k) {
+                    btns[k].style.background = "red";
+                    ps[k].style.display = "block";
+                } else {
+                    btns[k].style.background = "";
+                    ps[k].style.display = "none";
+                }
+            })
+        }
+
+
+    }
+
+    let btns = document.querySelectorAll(".tab1 button");
+    let ps = document.querySelectorAll(".tab1 p");
+    Tab(btns, ps, true);
+    let btns2 = document.querySelectorAll(".tab2 button");
+    let ps2 = document.querySelectorAll(".tab2 p");
+    Tab(btns2, ps2,false,true);
+
+
+
+
+</script>
+
+</html>

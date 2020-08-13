@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="tab1">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+    </div>
+    <div class="tab1">
+            <button style="background: red">按钮一</button>
+            <button>按钮二</button>
+            <button>按钮三</button>
+            <p>内容一</p>
+            <p style="display: none">内容二</p>
+            <p style="display: none">内容三</p>
+     </div>
+</body>
+<script>
+// 多个选项卡；
+let btns =  document.querySelectorAll(".tab1 button");
+let ps = document.querySelectorAll(".tab1 p");
+btns.forEach((value,key)=>{
+    value.onclick = function(){
+        ps.forEach((v,k)=>{
+            if(key==k){
+                btns[k].style.background = "red";
+                ps[k].style.display = "block"; 
+            }else{
+                btns[k].style.background = "";
+                ps[k].style.display = "none"; 
+            }
+        })
+    }
+})
+
+
+</script>
+</html>
