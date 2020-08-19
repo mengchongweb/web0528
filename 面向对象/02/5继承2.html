@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Dad(height) {
+        this.name = "jack";
+        this.age = 20;
+        this.height = height;
+        this.money = "$10000";
+      }
+
+      Dad.prototype.hobby = function () {
+        console.log("稀罕跑步");
+      };
+
+      function Son(height) {
+        Dad.call(this, height);
+        // Dad.apply(this,[height]);
+        // Dad.bind(this)(height);
+      }
+
+      Son.prototype = Dad.prototype;
+      Son.prototype.hobby = function () {
+        console.log("篮球");
+      };
+
+      let newSon = new Son("178cm");
+      // console.log(newSon);
+      newSon.hobby();
+      let newDad = new Dad("179cm");
+      newDad.hobby();
+    </script>
+  </body>
+</html>
