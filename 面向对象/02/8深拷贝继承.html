@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 组合继承；
+      function Dad(height) {
+        this.name = "张三";
+        this.age = 20;
+        this.height = height;
+        this.money = "$1000000";
+      }
+      Dad.prototype.hobby = function () {
+        console.log("喜欢高尔夫");
+      };
+
+      function Son(height) {
+        Dad.call(this, height);
+        // Dad.apply(this,[height])
+        // Dad.bind(this)(height);
+      }
+      let Link = function () {};
+      Link.prototype = Dad.prototype;
+      Son.prototype = new Link();
+      // Son.prototype  预定义属性constructor；
+      Son.prototype.constructor = Son;
+      Son.prototype.hobby = function () {
+        console.log("篮球");
+      };
+      let newSon = new Son("178cm");
+      // console.log(newSon);
+      newSon.hobby();
+      let newDad = new Dad("179cm");
+      newDad.hobby();
+    </script>
+  </body>
+</html>

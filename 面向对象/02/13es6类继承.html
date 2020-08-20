@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Drag {
+        static height = "178cm";
+        static test() {
+          console.log("test...");
+        }
+        constructor(age) {
+          this.name = "张三";
+          this.age = age;
+        }
+        hobby() {
+          console.log("篮球");
+        }
+        setStyle() {
+          console.log("父类逻辑");
+        }
+      }
+
+      class LimitDrag extends Drag {
+        constructor(age) {
+          super(age);
+        }
+        setStyle() {
+          super.setStyle();
+          console.log("子类逻辑");
+        }
+      }
+
+      let drag2 = new LimitDrag(20);
+      drag2.setStyle();
+    </script>
+  </body>
+</html>

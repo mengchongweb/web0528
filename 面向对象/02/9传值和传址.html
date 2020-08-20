@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // let a = 10;
+    // let b = a;
+    // b = 20;
+    // console.log(a);
+    let obj = {
+        name: "张三",
+        age: 20,
+        arr: [1, 2, 3],
+        obj3: {
+
+        },
+        test: undefined,
+        fn: function () {
+            console.log("fn...");
+        },
+        test2: null
+    }
+    // let obj2 = JSON.parse(JSON.stringify(obj));
+    let obj2 = deepCopy(obj);
+    obj2.age = 30;
+    console.log(obj, obj2);
+
+    function deepCopy(obj) {
+        let newObj = Array.isArray(obj) ? [] : {};
+        for (let i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                if (typeof obj[i] === "object") {
+                    if (obj[i] === null) {
+                        newObj[i] = null;
+                    } else {
+                        newObj[i] = deepCopy(obj[i]);
+                    }
+                } else {
+                    newObj[i] = obj[i];
+                }
+            }
+        }
+        return newObj;
+    }
+
+
+
+</script>
+
+</html>
