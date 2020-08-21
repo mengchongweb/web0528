@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn">点击</button>
+</body>
+<script>
+
+    function fn1() {
+        console.log("很多逻辑a");
+    }
+
+    function fn2() {
+        console.log("很多逻辑b");
+    }
+
+    // fn1();
+    // fn2();
+    // document.querySelector(".btn").addEventListener("click",fn1);
+    // document.querySelector(".btn").addEventListener("click",fn2);
+
+    // let handle = {
+    //     // "myevent1"
+    //     // "myevent2":[fn1,fn2,fn3....],
+    //     // "myevent3":[fn1,fn2,fn3....],
+    // };
+
+    // addEvent("myEvent",fn1);
+    // addEvent("myEvent",fn2);
+    // removeEvent("myEvent",fn2);
+    // trigger("myEvent");
+
+
+    // function addEvent(eventName, fn) {
+    //     if (typeof handle[eventName] === 'undefined') {
+    //         handle[eventName] = [];
+    //     }
+    //     handle[eventName].push(fn);
+    // }
+
+    // function trigger(eventName) {
+    //     if(!(eventName in handle)){
+    //         return ;
+    //     }
+    //     handle[eventName].forEach(v => {
+    //         v();
+    //     })
+    // }
+
+    // function removeEvent(eventName,fn){
+    //     if(!(eventName in handle)){
+    //         return ;
+    //     }
+    //     for(let i=0;i<handle[eventName].length;i++){
+    //         if(handle[eventName][i]===fn){
+    //             handle[eventName].splice(i,1);
+    //             break;
+    //         }
+    //     }
+    // }
+
+
+    class MyEvent {
+        constructor() {
+            this.handle = {};
+        }
+        addEvent(eventName, fn) {
+            if (typeof this.handle[eventName] === 'undefined') {
+                this.handle[eventName] = [];
+            }
+            this.handle[eventName].push(fn);
+        }
+        trigger(eventName) {
+            if (!(eventName in this.handle)) {
+                return;
+            }
+            this.handle[eventName].forEach(v => {
+                v();
+            })
+        }
+        removeEvent(eventName, fn) {
+            if (!(eventName in this.handle)) {
+                return;
+            }
+            for (let i = 0; i < this.handle[eventName].length; i++) {
+                if (this.handle[eventName][i] === fn) {
+                    this.handle[eventName].splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+    let newEvent = new MyEvent();
+    newEvent.addEvent("myEvent", fn1);
+    newEvent.addEvent("myEvent", fn2);
+    // newEvent.removeEvent("myEvent", fn2);
+    newEvent.trigger("myEvent");
+
+
+
+
+
+
+
+
+</script>
+
+</html>
